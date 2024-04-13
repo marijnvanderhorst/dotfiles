@@ -1,0 +1,9 @@
+{
+    "configurations": [
+        {
+            "name": "OSX Install",
+            "type": "command",
+            "program": "./osx_install.sh",
+        }
+    ]
+}

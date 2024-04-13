@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+git pull
+
+if [[ `uname` == 'Linux' ]]; then
+  /Users/marvanderhorst/.config/dotfiles/venv-ansible/bin/ansible-playbook -i inventory ubuntu.yml
+else
+  /Users/marvanderhorst/.config/dotfiles/venv-ansible/bin/ansible-playbook -i inventory osx.yml
+fi

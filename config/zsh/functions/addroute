@@ -1,0 +1,14 @@
+#!/bin/zsh
+local route=$(iplookup "$1")
+local gateway
+
+case "$2" in
+    "home")
+        gateway="192.168.1.1";;
+    "hotspot")
+        gateway="172.20.10.1";;
+    *)
+        gateway="$2";;
+esac
+
+sudo route -n add -net "$route" "$gateway" -hopcount 0
