@@ -1,0 +1,26 @@
+# Nix build outputs
+result
+result-*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Nix-darwin
+/result
+
+# Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.bak
+
+# agents
+.junie
+

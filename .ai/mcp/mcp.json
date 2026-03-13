@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "~/.secrets/context7/main.sh",
+      "args": [],
+      "type": "local"
+    }
+  }
+}
