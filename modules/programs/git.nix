@@ -21,7 +21,7 @@ in
 
       gpg = {
         ssh = {
-          allowedSignersFile = "${personal.home}.ssh/allowedSigners";
+          allowedSignersFile = "${personal.home}/.ssh/allowedSigners";
         };
       };
 
