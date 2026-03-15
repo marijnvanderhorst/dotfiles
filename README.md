@@ -74,7 +74,7 @@ Since you already have this machine set up, you'll want to:
    brew list
    brew list --cask
    ```
-   
+
    Add any packages you want to keep to `modules/system/homebrew.nix` or `modules/packages.nix`
 
 2. **Apply configuration** (this will install nix-darwin):
@@ -86,7 +86,7 @@ Since you already have this machine set up, you'll want to:
    ```bash
    darwin-rebuild switch --flake ~/dotfiles
    ```
-   
+
    Or use the alias (after first setup):
    ```bash
    update
@@ -153,21 +153,42 @@ darwin-rebuild switch --flake ~/dotfiles
 
 ```
 ~/dotfiles/
-├── flake.nix                          # Nix flake entry point
-├── flake.lock                         # Locked dependency versions
 ├── darwin-configuration.nix           # Main system configuration
+├── flake.lock                         # Locked dependency versions
+├── flake.nix                          # Nix flake entry point
 ├── home.nix                           # Home Manager configuration
+├── personal.nix                       # Machine/user-local config overrides
 ├── modules/
+│   ├── packages.nix                   # Nix packages
+│   ├── programs/
+│   │   ├── git.nix                    # Git configuration
+│   │   ├── obsidian.nix               # Obsidian configuration
+│   │   ├── starship.nix               # Starship prompt configuration
+│   │   └── zsh.nix                    # Zsh configuration
 │   ├── system/
-│   │   ├── defaults.nix              # macOS system preferences
-│   │   └── homebrew.nix              # Homebrew packages & apps
-│   ├── packages.nix                  # Nix packages
-│   └── programs/
-│       ├── git.nix                   # Git configuration
-│       └── zsh.nix                   # Zsh configuration
+│   │   ├── defaults.nix               # macOS system preferences
+│   │   ├── direnv.nix                 # direnv + nix-direnv setup
+│   │   ├── dnsmasq.nix                # Local DNS configuration
+│   │   └── homebrew.nix               # Homebrew packages & apps
+├── certs/
+│   └── collect-cas.sh                 # Certificate helper script
 ├── scripts/
-│   └── bootstrap.sh                  # Initial setup script
-└── README.md                         # This file
+│   └── bootstrap.sh                   # Initial setup script
+└── README.md                          # This file
+```
+
+## Local-Only `personal.nix`
+
+To keep local changes in `personal.nix` out of normal Git tracking:
+
+```bash
+git update-index --skip-worktree personal.nix
+```
+
+To start tracking changes in `personal.nix` again:
+
+```bash
+git update-index --no-skip-worktree personal.nix
 ```
 
 ## Configuration Details
