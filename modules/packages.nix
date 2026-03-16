@@ -122,17 +122,20 @@ in
     # Nix development tools
     nixpkgs-fmt # Nix code formatter
     nil # Nix Language Server
+
+    spotify
   ];
 
   nixpkgs.config = {
     allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [
-        "jetbrains-toolbox"
-        "vscode"
-        "daisydisk"
         "bws"
+        "daisydisk"
+        "jetbrains-toolbox"
         "obsidian"
+        "spotify"
+        "vscode"
       ];
   };
 }
