@@ -124,6 +124,7 @@ in
     nil # Nix Language Server
 
     spotify
+    thunderbird
   ];
 
   nixpkgs.config = {
