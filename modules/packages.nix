@@ -100,7 +100,6 @@ in
     ripgrep # Better grep (rg)
     tmux # Terminal multiplexer
     tree # Directory tree viewer
-    azure-cli # Azure CLI
     snyk # Snyk Security Scanner
     devcontainer # Development Containers CLI
     awscli # AWS CLI v2
@@ -108,6 +107,11 @@ in
     zoxide # Directory navigation
     imagemagick
     ffmpeg
+
+    # Azure CLI
+    (azure-cli.withExtensions [
+      pkgs.azure-cli-extensions.fzf
+    ])
 
     # Development tools
     #opencode            # AI coding assistant
