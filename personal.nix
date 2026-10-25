@@ -30,4 +30,9 @@ rec {
 
   # Computed properties
   home = "/Users/${username}";
+
+  paths = {
+    history = "${home}/.zsh_history";
+    dotfiles = "${home}/dotfiles";
+  };
 }
