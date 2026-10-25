@@ -22,22 +22,23 @@
             small = true;
           };
         }
+        { app = "${config.system.primaryUserHome}/Applications/Home Manager Apps/Obsidian.app"; }
         { app = "/Applications/Microsoft Teams.app"; }
         { app = "/Applications/Microsoft Outlook.app"; }
         { app = "/Applications/Google Chrome.app"; }
         { app = "/Applications/Bitwarden.app"; }
-        { app = "${pkgs.ghostty-bin}/Applications/Ghostty.app"; }
+        { app = "/Applications/Nix Apps/Ghostty.app"; }
         {
           spacer = {
             small = true;
           };
         }
-        { app = "${config.system.primaryUserHome}/Applications/IntelliJ IDEA.app"; }
+        { app = "/Applications/IntelliJ IDEA.app"; }
         { app = "${config.system.primaryUserHome}/Applications/DataGrip.app"; }
-        { app = "${config.system.primaryUserHome}/Applications/PyCharm.app"; }
+        { app = "/Applications/PyCharm.app"; }
         { app = "${config.system.primaryUserHome}/Applications/Rider.app"; }
         { app = "${config.system.primaryUserHome}/Applications/WebStorm.app"; }
-        { app = "${config.system.primaryUserHome}/Applications/PhpStorm.app"; }
+        { app = "/Applications/PhpStorm Light.app"; }
         { app = "${config.system.primaryUserHome}/Applications/CLion.app"; }
         {
           spacer = {

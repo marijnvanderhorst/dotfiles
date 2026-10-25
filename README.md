@@ -163,6 +163,7 @@ darwin-rebuild switch --flake ~/dotfiles
 │   ├── programs/
 │   │   ├── git.nix                    # Git configuration
 │   │   ├── obsidian.nix               # Obsidian configuration
+│   │   ├── secrets.nix                # Keychain-backed env helpers (keychain-env, keychain-sync)
 │   │   ├── starship.nix               # Starship prompt configuration
 │   │   └── zsh.nix                    # Zsh configuration
 │   ├── system/
@@ -216,6 +217,52 @@ Secrets (SSH keys, API tokens, etc.) are managed via Bitwarden, NOT committed to
 - **SSH Keys**: Use Bitwarden SSH Agent
 - **API Tokens**: Use Bitwarden CLI or Secrets
 - **Passwords**: Stored in Bitwarden
+
+### Per-directory env vars from macOS Keychain
+
+For shell environment variables that authenticate CLIs (e.g. `GITHUB_TOKEN`,
+`OPENAI_API_KEY`), secrets are cached in the **macOS login Keychain** and
+auto-exported via [direnv](https://direnv.net/) when you `cd` into a project.
+
+Two helpers are provided (declared in `modules/programs/secrets.nix`):
+
+- `keychain-sync <bitwarden_item> [keychain_service] [field]`
+  Pulls a secret from your Bitwarden vault and stores it as a generic
+  password in the login Keychain. Field defaults to `password`.
+- `keychain-env VAR [SERVICE]`
+  Reads `SERVICE` (default: `VAR`) from the Keychain and prints
+  `export VAR=<value>` to stdout — usable as `eval "$(keychain-env FOO)"`.
+
+A direnv stdlib function `keychain_env` is also installed (see
+`modules/system/direnv.nix`) for cleaner `.envrc` syntax.
+
+#### One-time bootstrap
+
+```bash
+bw login                       # interactive, once per machine
+keychain-sync github_token     # pulls 'github_token' item -> Keychain
+```
+
+#### Per-project usage
+
+In any project directory:
+
+```bash
+# .envrc
+keychain_env GITHUB_TOKEN
+keychain_env OPENAI_API_KEY openai_api_key   # var name != service name
+```
+
+Then run `direnv allow` once per directory. On the first read, macOS will
+prompt to grant Keychain access — choose **Always Allow** to suppress
+future prompts for that calling binary.
+
+#### Standalone (outside direnv)
+
+```bash
+eval "$(keychain-env GITHUB_TOKEN)"
+gh auth status
+```
 
 ## Troubleshooting
 

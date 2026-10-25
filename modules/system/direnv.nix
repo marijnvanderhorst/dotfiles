@@ -11,6 +11,11 @@
           pkgs.file
         ]
       }"
-    '';
+
+      use_fnm() {
+          fnm use
+      }
+
+    '' + builtins.readFile ../../scripts/secrets/direnv-keychain_env.sh;
   };
 }

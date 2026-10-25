@@ -9,6 +9,7 @@ in
     ./modules/system/homebrew.nix
     ./modules/system/dnsmasq.nix
     ./modules/system/direnv.nix
+    ./modules/system/secrets.nix
     ./modules/packages.nix
   ];
 
@@ -16,6 +17,8 @@ in
   nix.settings = {
     experimental-features = "nix-command flakes";
     download-buffer-size = 1073741824; # 1GB
+    cores = 0; # '0' means use all available CPU cores for a single build
+    max-jobs = "auto"; # Run as many parallel package builds as you have CPUs
   };
 
   nix.optimise = {

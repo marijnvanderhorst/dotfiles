@@ -19,6 +19,18 @@ in
         email = personal.defaults.git.email;
       };
 
+      merge = {
+        tool = "intellij";
+      };
+
+      mergetool = {
+        "intellij" = {
+          cmd = "idea merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"";
+          trustExitCode = true;
+        };
+        keepBackup = true;
+      };
+
       gpg = {
         ssh = {
           allowedSignersFile = "${personal.home}/.ssh/allowedSigners";
@@ -46,7 +58,9 @@ in
       };
 
       credential = {
-        helper = pkgs.lib.meta.getExe pkgs.git-credential-manager;
+        helper = [
+          "/usr/local/share/gcm-core/git-credential-manager"
+        ];
         credentialStore = "keychain";
         azreposCredentialType = "oauth";
 

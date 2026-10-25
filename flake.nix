@@ -13,15 +13,20 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nurpkgs = {
+      url = "github:mio-19/nurpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     inputs@{ self
     , nix-darwin
-    , nixpkgs
-    , home-manager
-    ,
-    }:
+     , nixpkgs
+     , home-manager
+     , ...
+     }:
     let
       personal = import ./personal.nix;
       system = "aarch64-darwin";
@@ -31,6 +36,7 @@
 
       darwinConfigurations.${personal.hostname} = nix-darwin.lib.darwinSystem {
         inherit system;
+        specialArgs = { inherit inputs; };
         modules = [
           ./darwin-configuration.nix
           home-manager.darwinModules.home-manager
